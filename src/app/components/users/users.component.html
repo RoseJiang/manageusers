@@ -1,3 +1,37 @@
-<p>
-  users works!
-</p>
+
+<div class="row">
+	<div class="col-sm-12 col-lg-6">
+		<h2><i class="fa fa-users"></i>用户信息</h2>
+	</div>	
+	<div class="col-sm-12 col-lg-6">
+		<h2 class="pull-right text-muted">收支总和:{{totalOwn + "元"}} </h2>
+	</div>	
+</div>
+
+<table *ngIf="users?.length > 0; else noUser" class=" table table-striped">
+	<thead>
+		<th>ID</th>
+		<th>姓名</th>
+		<th>邮箱</th>
+		<th>电话</th>
+		<th>收支</th>
+		<th></th>
+	</thead>
+    <tbody>
+    	<tr *ngFor="let user of users">
+    		<td>{{user.id}}</td>
+    		<td>{{user.name}}</td>
+    		<td>{{user.email}}</td>
+    		<td>{{user.phone}}</td>
+    		<td>{{user.balance + "元"}}</td>
+    		<td><a href="#" class="btn btn-secondary btn-sm">
+    			<i class="fa fa-arrow-circle-o-right"></i> 详情</a></td>
+    	</tr>
+    </tbody>
+</table>
+
+<ng-template #noUser>
+	<hr>
+	<h5>没有用户存在</h5>
+</ng-template>
+
