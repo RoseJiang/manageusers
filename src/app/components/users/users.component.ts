@@ -9,7 +9,7 @@ import { User } from '../../models/user';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-	users:User [];
+	users:any [];
 	totalOwn;
 
   constructor(public service: UserService) { }
@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
   getTotalOwn() {
   	let total = 0;
   	for(let i = 0; i < this.users.length; i++) {
-  		total += this.users[i].balance;
+  		total += parseFloat(this.users[i].balance);
   		console.log(this.users[i].balance);
   	}
   	this.totalOwn = total;

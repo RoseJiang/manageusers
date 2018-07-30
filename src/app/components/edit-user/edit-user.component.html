@@ -1,3 +1,44 @@
-<p>
-  edit-user works!
-</p>
+<div class="row">
+	<div class="col-md-6">
+		<a href="#" [routerLink]="['/user/' + id]" class="btn btn-link">
+			<i class="fa fa-arrow-circle-o-left"></i>返回详情
+		</a>
+	</div>	
+	<div class="col-md-6"></div>
+</div>
+<div class="card">
+	<div class="card-header">
+		编辑用户
+	</div>
+	<div class="card-block">
+		<form *ngIf="user" #f="ngForm" (ngSubmit)="onSubmit(f)">
+			<div class="form-group">
+				<label for="name">
+					 姓名
+				</label>
+				<input class="form-control" type="text" name="name" [(ngModel)]="user.name" minlength="2" required>
+			</div>
+			<div class="form-group">
+				<label for="email">
+					 邮箱
+				</label>
+				<input class="form-control" type="text" name="email" [(ngModel)]="user.email" minlength="2" required>
+			</div>
+			<div class="form-group">
+				<label for="phone">
+					 手机
+				</label>
+				<input class="form-control" type="text" name="phone" [(ngModel)]="user.phone" minlength="11" maxlength="11" required>
+			</div>
+			<div class="form-group">
+				<label for="balance">
+					 收支
+				</label>
+				<input class="form-control" type="text" name="balance" [(ngModel)]="user.balance" [disabled]="disabledBalanceOnEdit">
+			</div>
+			<input type="submit" name="" value="确认" class="btn btn-primary btn-block">
+		</form>
+	</div>
+</div>
+
+

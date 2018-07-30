@@ -1,3 +1,55 @@
-<p>
-  user-detail works!
-</p>
+<div class="row">
+	<div class="col-md-6">
+		<a href="#" routerLink="/" class="btn btn-link">
+			<i class="fa fa-arrow-circle-left">返回主页</i>
+		</a>
+	</div>
+	<div class="col-md-6">
+		<div class="btn-group pull-right">
+			<a  [routerLink]="['/edit-user/' + user?.id]" href="#" class="btn btn-secondary">编辑</a>
+			<button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">删除</button>
+		</div>
+	</div>
+</div>
+<div *ngIf="user" class="card">
+	<h3 class="card-header">
+		{{user.name}}
+	</h3>
+	<div class="card-block">
+		<div class="row">
+			<div class="col-md-8">
+				<h4>用户ID: {{id}}</h4>
+			</div>
+			<div class="col-md-4">
+				<h3 class="pull-right">
+					收支：
+					<span [class.text-danger]="!hasBalance" [class.text-success]="hasBalance">
+						{{ user.balance + "元"}}
+					</span>
+					<small>
+						<a (click)="updateBalanceInput=!updateBalanceInput">
+							<i class="fa fa-pencil" ></i>
+						</a>
+					</small>
+				</h3>
+				<div class="updateBalance">
+					<form *ngIf="updateBalanceInput" (submit)="updateBalance(user.id)" class="form-inline pull-right">
+						<div class="form-group">
+							<input type="text" name="balance" class="form-control" [(ngModel)]="user.balance">
+						</div>
+						<button type="submit" class="btn btn-primary">更新</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<ul class="list-group">
+		<li class="list-group-item">
+		   联系邮箱：{{user.email}}
+		</li>
+		<li class="list-group-item">
+		   联系方式：{{user.phone}}
+		</li>
+	</ul>
+</div>

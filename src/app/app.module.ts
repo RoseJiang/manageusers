@@ -21,7 +21,9 @@ const appRoutes: Routes  = [
    { path: '', component: HomeComponent},
    { path: 'register', component: RegisterComponent},
    { path: 'login', component: LoginComponent},
-   { path: 'add-user', component: AddUserComponent}
+   { path: 'add-user', component: AddUserComponent},
+   { path: 'user/:id', component: UserDetailComponent},
+   { path: 'edit-user/:id', component: EditUserComponent}
 ];
 
 @NgModule({
