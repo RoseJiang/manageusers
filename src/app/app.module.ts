@@ -17,6 +17,10 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AngularFireModule } from  'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthService } from './services/auth.service';
+
 const appRoutes: Routes  = [
    { path: '', component: HomeComponent},
    { path: 'register', component: RegisterComponent},
@@ -25,6 +29,15 @@ const appRoutes: Routes  = [
    { path: 'user/:id', component: UserDetailComponent},
    { path: 'edit-user/:id', component: EditUserComponent}
 ];
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAk4KMUjBSihrjB5z3hiAJ4MNotfuDwbII",
+    authDomain: "manageusers-b9dc1.firebaseapp.com",
+    databaseURL: "https://manageusers-b9dc1.firebaseio.com",
+    projectId: "manageusers-b9dc1",
+    storageBucket: "manageusers-b9dc1.appspot.com",
+    messagingSenderId: "416181401656"
+  };
 
 @NgModule({
   declarations: [
@@ -46,9 +59,13 @@ const appRoutes: Routes  = [
     HttpModule,
     FormsModule,
     FlashMessagesModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    AngularFireAuth,
+    AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
