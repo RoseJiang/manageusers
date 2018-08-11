@@ -3,6 +3,8 @@ import { User } from '../../models/user';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { SettingsService } from '../../services/settings.service';
+
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -15,13 +17,14 @@ export class AddUserComponent implements OnInit {
     email: '',
     balance: 0
   };
-  disabledBalanceOnAdd:boolean = true;
+  disabledBalanceOnAdd:boolean;
   constructor(private _flashMessagesService: FlashMessagesService,
               private userService: UserService,
-              private router: Router) { }
+              private router: Router,
+              private settingsService: SettingsService) { }
 
   ngOnInit() {
-
+      this.disabledBalanceOnAdd = this.settingsService.getSettings().disabledOnAdd;
   }
 
   onSubmit({value, valid}: {value: User, valid:boolean}) {

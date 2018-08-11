@@ -20,14 +20,17 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { AngularFireModule } from  'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from './services/auth.service';
+import { AuthGard } from './guard/auth-guard.service';
+import { RegisterGard } from './guard/register-guard';
+import { SettingsService } from './services/settings.service';
 
 const appRoutes: Routes  = [
-   { path: '', component: HomeComponent},
-   { path: 'register', component: RegisterComponent},
+   { path: '', component: HomeComponent, canActivate: [AuthGard]},
+   { path: 'register', component: RegisterComponent, canActivate: [RegisterGard]},
    { path: 'login', component: LoginComponent},
-   { path: 'add-user', component: AddUserComponent},
-   { path: 'user/:id', component: UserDetailComponent},
-   { path: 'edit-user/:id', component: EditUserComponent}
+   { path: 'add-user', component: AddUserComponent, canActivate: [AuthGard]},
+   { path: 'user/:id', component: UserDetailComponent, canActivate: [AuthGard]},
+   { path: 'edit-user/:id', component: EditUserComponent, canActivate: [AuthGard]}
 ];
 
 const firebaseConfig = {
@@ -65,7 +68,10 @@ const firebaseConfig = {
   providers: [
     UserService,
     AngularFireAuth,
-    AuthService],
+    AuthService,
+    AuthGard,
+    RegisterGard,
+    SettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
